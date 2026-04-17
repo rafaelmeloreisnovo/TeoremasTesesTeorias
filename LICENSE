@@ -1,21 +1,138 @@
-MIT License
+Sobre Invariância Estrutural sob Transformações: Um Esboço de Programa de Pesquisa Transdisciplinar
 
-Copyright (c) 2026 Rafael mreis 
+Resumo
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Este trabalho apresenta um conjunto de hipóteses, estruturas formais e direções de pesquisa centradas na noção de invariância estrutural sob transformação. A proposta unifica elementos de sistemas dinâmicos, teoria dos números, linguística computacional e cognição, sugerindo que informação relevante pode ser caracterizada como estrutura que persiste sob operações de transformação. São introduzidos quatro invariantes fundamentais, cinco hipóteses pesquisáveis e um núcleo matemático formalizável baseado na preservação geométrica em reticulados inteiros. O objetivo é estabelecer anterioridade conceitual e delinear um programa de investigação com potencial de formalização e validação empírica.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+---
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. Introdução
+
+A análise de sistemas complexos em diferentes domínios frequentemente revela a recorrência de estruturas que persistem sob transformação. Este trabalho parte da hipótese de que tais estruturas invariantes constituem a unidade fundamental de informação relevante, independentemente do domínio específico — seja matemático, linguístico ou cognitivo.
+
+A abordagem adotada privilegia relações estruturais em detrimento de representações reduzidas, evitando simplificações que eliminem informação posicional ou geométrica.
+
+---
+
+2. Núcleo Matemático
+
+2.1 Sistema Dinâmico com Memória Controlada
+
+Considera-se o sistema recursivo:
+
+[
+s_{t+1} = (1 - \alpha)s_t + \alpha x_t, \quad 0 < \alpha < 1
+]
+
+Este sistema satisfaz a condição de estabilidade BIBO (bounded-input bounded-state), garantindo que entradas limitadas produzem estados limitados. A solução fechada apresenta memória exponencialmente ponderada, característica recorrente em sistemas naturais e artificiais.
+
+---
+
+2.2 Representação em Reticulado Inteiro
+
+Frações são tratadas como elementos de ℤ²:
+
+[
+(a,b) \in \mathbb{Z}^2
+]
+
+Em vez de sua forma reduzida a/b. Nesse contexto, pares como (77,33) e (7,3), embora equivalentes como razões, ocupam posições distintas no reticulado.
+
+Define-se um invariante geométrico simples:
+
+[
+I(a,b) = \log(a^2 + b^2)
+]
+
+Este invariante distingue representações equivalentes sob simplificação, evidenciando perda de informação estrutural quando a redução é aplicada prematuramente.
+
+---
+
+2.3 Não-Comutatividade da Simplificação
+
+Sejam:
+
+- S: operador de simplificação por máximo divisor comum
+- P: operador de posicionamento em ℤ²
+
+Então, em geral:
+
+[
+P(S(a,b)) \neq S(P(a,b))
+]
+
+Este resultado sugere que simplificação e posicionamento não comutam sob invariantes geométricos, implicando que a ordem das operações afeta a informação preservada.
+
+---
+
+2.4 Sequências Geométricas Estruturadas
+
+Considera-se a família:
+
+[
+x_n = \left(\frac{\sqrt{3}}{2}\right)^{F_n}
+]
+
+onde F_n são números de Fibonacci. Esta construção define uma sequência de contrações geométricas não lineares com potencial relação com estruturas quasicristalinas. A ausência de literatura consolidada indica uma direção aberta de investigação.
+
+---
+
+3. Hipóteses de Pesquisa
+
+3.1 Geometria Semântica Multilíngue
+
+Línguas naturais projetam conceitos em espaços semânticos com geometrias distintas. A distância entre essas projeções é mensurável via embeddings.
+
+3.2 Atratores como Unidades de Significado
+
+Conceitos persistentes sob transformação linguística comportam-se como atratores em sistemas dinâmicos de alta dimensão.
+
+3.3 Preservação Estrutural na Aritmética
+
+A simplificação algébrica pode eliminar informação relevante quando aplicada antes da análise estrutural.
+
+3.4 Tradução como Isomorfismo Estrutural
+
+A tradução semântica profunda pode ser modelada como busca de isomorfismo entre grafos de dependência, com possível complexidade não trivial.
+
+3.5 Cognição Corporificada Multilíngue
+
+Estruturas linguísticas distintas podem induzir estados fisiológicos mensuráveis diferentes em indivíduos multilíngues.
+
+---
+
+4. Princípio Unificador
+
+Propõe-se o seguinte princípio:
+
+«Informação relevante corresponde à estrutura que permanece invariante sob transformações admissíveis.»
+
+Este princípio é consistente com:
+
+- estabilidade em sistemas dinâmicos
+- equivalência estrutural em matemática
+- preservação semântica em linguagem
+
+---
+
+5. Direções Abertas
+
+- Formalização completa de invariantes em ℤ²
+- Caracterização matemática da sequência (\sqrt{3}/2)^{F_n}
+- Modelagem computacional de tradução como isomorfismo de grafos
+- Definição operacional de sintropia em sistemas informacionais
+- Validação experimental de efeitos fisiológicos em cognição multilíngue
+
+---
+
+6. Conclusão
+
+Este trabalho estabelece um conjunto coerente de estruturas e hipóteses centradas na invariância estrutural. Embora incompleto do ponto de vista de validação empírica e formalização total, o sistema apresentado possui consistência interna e múltiplos caminhos claros para teste e desenvolvimento.
+
+O principal resultado é a identificação de um eixo unificador entre diferentes domínios: a persistência de estrutura sob transformação como critério de relevância informacional.
+
+---
+
+Palavras-chave
+
+Invariância estrutural, sistemas dinâmicos, reticulados inteiros, semântica, tradução, cognição, informação
