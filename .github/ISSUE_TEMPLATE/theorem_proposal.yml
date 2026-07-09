@@ -1,0 +1,36 @@
+name: "Theorem / Prior Art Proposal"
+description: "Propose a new theorem, lemma, or prior art record."
+labels: ["theorem", "proposal"]
+assignees: ["rafaelmeloreisnovo"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: "Theorem title"
+      placeholder: "Coherence Preservation in Modular T⁷ Transformations"
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: "Document type"
+      options:
+        - "Theorem"
+        - "Lemma"
+        - "Prior Art Record"
+        - "Research Conjecture"
+        - "Thesis Chapter"
+    validations:
+      required: true
+  - type: textarea
+    id: statement
+    attributes:
+      label: "Mathematical statement"
+      placeholder: "Let N be a finite cyclic group of order n. Then..."
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: "Prior work / references"
+      placeholder: "BibTeX..."
