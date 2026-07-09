@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "claude/**"]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate Repository Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli2
+
+      - name: Lint Markdown
+        run: markdownlint-cli2 "**/*.md" "#node_modules"
+
+      - name: Check required root files
+        run: |
+          for f in README.md CONTRIBUTING.md CHANGELOG.md CODE_OF_CONDUCT.md LICENSE; do
+            [ -f "$f" ] || { echo "Missing: $f"; exit 1; }
+          done
+          echo "All required root files present."
+
+      - name: Check directory structure
+        run: |
+          [ -d "theorems" ] || { echo "Missing: theorems/"; exit 1; }
+          [ -d "docs" ] || { echo "Missing: docs/"; exit 1; }
+          echo "Structure validated."
+
+  test-python:
+    name: Python Scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check Python syntax
+        run: |
+          find src/ -name "*.py" | xargs python3 -m py_compile && echo "Python syntax OK"
