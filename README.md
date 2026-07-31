@@ -1,5 +1,9 @@
 # TeoremasTesesTeorias
 
+**Estado:** `REFERENCE`  
+**Proprietário lógico:** `research-governance`  
+**Repositório:** [`rafaelmeloreisnovo/TeoremasTesesTeorias`](https://github.com/rafaelmeloreisnovo/TeoremasTesesTeorias)
+
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Domain](https://img.shields.io/badge/Domain-Formal%20Mathematics%20%7C%20Theorems%20%7C%20Prior%20Art-purple)](theorems/)
 [![Research](https://img.shields.io/badge/Research-RAFAELIA%20Ecosystem-orange)](https://github.com/rafaelmeloreisnovo/ChipQuantum)
