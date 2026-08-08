@@ -1,242 +1,265 @@
-Toward a Formal Definition of Discrete Harmonic Alignment in Cyclic Structures
+# Toward a Formal Definition of Discrete Harmonic Alignment in Cyclic Structures
 
-Abstract
+**Revision:** 2026-08-08 — pairwise alignment formula corrected and claim boundary tightened.
 
-This work proposes an initial formalization of Discrete Harmonic Alignment (DHA): a framework for analyzing how multiple periodic components interact within finite cyclic structures. While harmonic analysis, group theory, and electrical engineering independently address periodicity, frequency, and phase relationships, there is no unified formulation that explicitly connects integer divisibility, cyclic discretization, and multi-frequency alignment efficiency.
+## Abstract
 
-We introduce a preliminary metric H(N, {f_i}) to quantify harmonic coherence in discrete cyclic domains of size N, and explore its implications for signal processing, electrical phase systems, and structured representations in computational models. This paper establishes the conceptual and mathematical groundwork for future empirical validation.
-
----
-
-1. Introduction
-
-Periodic systems arise across disciplines, including signal processing, electrical engineering, and dynamical systems. In practice, many systems operate on discretized cyclic domains, such as:
-
-- phase systems in electrical engineering (e.g., three-phase systems),
-- angular discretization (e.g., clock-like partitions of 2\pi),
-- discrete Fourier representations.
-
-Despite this, there is no explicit framework that answers the question:
-
-«Given a finite cyclic structure, how well can multiple discrete frequencies align within it?»
-
-This work introduces a formal structure to address this gap.
+This work proposes an initial formalization of Discrete Harmonic Alignment (DHA): a framework for analyzing how multiple periodic components interact within finite cyclic structures. The construction connects integer divisibility, cyclic discretization and multi-frequency alignment costs. It is a mathematical research framework, not a validated physical law.
 
 ---
 
-2. Preliminaries
+## 1. Cyclic domain
 
-2.1 Cyclic Domains
+Let
 
-Let:
+\[
+\mathbb Z_N=\{0,1,\ldots,N-1\}
+\]
 
-[
-\mathbb{Z}_N = {0,1,2,\dots,N-1}
-]
+with angular embedding
 
-be a finite cyclic group representing a discretized circle.
+\[
+\theta_k=\frac{2\pi k}{N}.
+\]
 
-Each element corresponds to an angular position:
+A discrete frequency `f` induces the orbit
 
-[
-\theta_k = \frac{2\pi k}{N}
-]
+\[
+\phi_f(t)=ft\pmod N.
+\]
 
----
+The individual return period to phase zero is
 
-2.2 Discrete Frequencies
-
-A frequency f \in \mathbb{N} induces a mapping:
-
-[
-\phi_f(t) = (f \cdot t) \mod N
-]
-
-This defines a periodic orbit over \mathbb{Z}_N.
+\[
+T_f=\frac{N}{\gcd(N,f)}.
+\]
 
 ---
 
-2.3 Alignment Condition
+## 2. Two events that must not be conflated
 
-Two frequencies f_i, f_j are said to align if:
+### 2.1 Pairwise phase alignment
 
-[
-\exists \ t > 0 \text{ such that } f_i t \equiv f_j t \ (\text{mod } N)
-]
+Frequencies `f_i` and `f_j` align when
 
-The smallest such t is governed by:
+\[
+f_it\equiv f_jt\pmod N.
+\]
 
-[
-t = \frac{\text{LCM}(N / \gcd(N, f_i), , N / \gcd(N, f_j))}{}
-]
+Equivalently,
 
----
+\[
+(f_i-f_j)t\equiv0\pmod N.
+\]
 
-3. Discrete Harmonic Alignment (DHA)
+If `f_i != f_j (mod N)`, the smallest positive alignment time is
 
-We define a system:
+\[
+\boxed{
+T_{\rm align}(f_i,f_j;N)
+=\frac{N}{\gcd(N,|f_i-f_j|)}
+}.
+\]
 
-[
-S = (N, {f_1, f_2, ..., f_k})
-]
+If `f_i == f_j (mod N)`, the two phases agree at every step; by convention the smallest positive time is `1`.
 
-where:
+### 2.2 Simultaneous return to phase zero
 
-- N is the cyclic resolution,
-- f_i are discrete frequencies.
+A stronger event is
 
----
+\[
+f_it\equiv0\pmod N,
+\qquad
+f_jt\equiv0\pmod N.
+\]
 
-3.1 Alignment Measure
+Its smallest positive time is
 
-We define the alignment cost:
+\[
+\boxed{
+T_{\rm origin}(f_i,f_j;N)
+=\operatorname{lcm}(T_i,T_j)
+}
+\]
 
-[
-A(f_i, f_j, N) = \text{LCM}(T_i, T_j)
-]
+where
 
-where:
+\[
+T_i=\frac{N}{\gcd(N,f_i)},
+\qquad
+T_j=\frac{N}{\gcd(N,f_j)}.
+\]
 
-[
-T_i = \frac{N}{\gcd(N, f_i)}
-]
+The historical version of this document used `T_origin` while calling it the first pairwise alignment. That was too strong and is corrected here.
 
----
+### Counterexample that separates the two definitions
 
-3.2 Harmonic Coherence Function
+For
 
-We define:
+```text
+N=12, fi=1, fj=3
+```
 
-[
-H(N, {f_i}) = \frac{1}{\sum_{i<j} A(f_i, f_j, N)}
-]
+we have
 
-Interpretation:
+\[
+T_{\rm align}=\frac{12}{\gcd(12,2)}=6,
+\]
 
-- Lower total alignment cost → higher harmonic coherence
-- Larger H → more efficient alignment
+but
 
----
+\[
+T_{\rm origin}=\operatorname{lcm}(12,4)=12.
+\]
 
-4. Structural Properties
-
-4.1 Role of Divisibility
-
-If N has many small prime factors:
-
-[
-N = \prod p_i^{e_i}
-]
-
-then:
-
-- more frequencies divide N,
-- more orbits close quickly,
-- alignment improves.
-
----
-
-4.2 Example: N = 12
-
-Frequencies:
-
-[
-{3, 4, 6}
-]
-
-- \gcd(12,3)=3 \Rightarrow T=4
-- \gcd(12,4)=4 \Rightarrow T=3
-- \gcd(12,6)=6 \Rightarrow T=2
-
-Alignment occurs rapidly, yielding high H.
+Therefore the two quantities are not interchangeable.
 
 ---
 
-4.3 Example: N = 10
+## 3. DHA system
 
-Frequencies:
+Define
 
-[
-{3, 4}
-]
+\[
+S=(N,\{f_1,\ldots,f_k\}).
+\]
 
-- poor divisibility
-- longer alignment cycles
+Two useful cost matrices are now kept separate:
 
-→ lower H
+\[
+A_{ij}=T_{\rm align}(f_i,f_j;N),
+\]
 
----
+\[
+O_{ij}=T_{\rm origin}(f_i,f_j;N).
+\]
 
-5. Geometric Interpretation
-
-Each frequency corresponds to a polygon on the circle:
-
-- f=3 → triangle
-- f=4 → square
-- f=6 → hexagon
-
-Discrete harmonic alignment corresponds to:
-
-«the synchronization of these geometric cycles within a shared angular lattice»
+`A` measures first mutual phase coincidence. `O` measures first simultaneous return to phase zero.
 
 ---
 
-6. Connection to Physical Systems
+## 4. Aggregate metrics
 
-6.1 Electrical Engineering
+The historical coherence quantity
 
-Three-phase systems correspond to:
+\[
+H_{\rm raw}=\frac{1}{\sum_{i<j}A_{ij}}
+\]
 
-[
-f = 3, \quad \theta = 120^\circ
-]
+is a valid authorial scalar once the intended cost is declared, but it is not automatically comparable across systems with different numbers of frequencies because the number of pairs changes.
 
-This is a special case of DHA with optimal symmetry.
+For fixed `k`, it can be used as a relative ranking. For comparisons across different `k`, report at least the mean pair cost
 
----
+\[
+\overline A
+=\frac{1}{\binom{k}{2}}
+\sum_{i<j}A_{ij},
+\qquad k\ge2,
+\]
 
-6.2 Signal Processing
+or another explicitly normalized statistic.
 
-Discrete Fourier Transform implicitly relies on:
+Claim boundary:
 
-- cyclic domains
-- frequency alignment
-
-DHA provides a structural lens for evaluating efficiency.
-
----
-
-7. Hypothesis
-
-We propose:
-
-«Cyclic domains with high factorability (e.g., N = 12, 144) maximize discrete harmonic alignment across diverse frequency sets.»
-
----
-
-8. Open Problems
-
-1. Optimal N for arbitrary frequency sets
-2. Extension to weighted frequencies
-3. Continuous limit N \to \infty
-4. Application to neural representations and embeddings
+```text
+pairwise_alignment_formula = MATH_PASS
+joint_origin_formula = MATH_PASS
+H_raw = VALID_DEFINITION
+cross_k_comparability_of_H_raw = BLOCKED_WITHOUT_NORMALIZATION
+```
 
 ---
 
-9. Conclusion
+## 5. Divisibility and orbit structure
 
-This work introduces a formal candidate framework for analyzing harmonic alignment in finite cyclic systems. By connecting number theory, geometry, and periodic dynamics, it opens a direction for quantifying structural efficiency in discrete harmonic systems.
+For one frequency, orbit cardinality is
+
+\[
+|\mathcal O_f|=\frac{N}{\gcd(N,f)}.
+\]
+
+Composite values of `N` can provide many distinct subgroup/orbit structures, but “higher factorability always maximizes alignment for arbitrary frequency sets” is not a theorem of the current definitions.
+
+It remains a testable optimization question:
+
+```text
+high_factorability_global_optimum = HYPOTHESIS
+```
 
 ---
 
-Keywords
+## 6. Examples
 
-Discrete Harmonics, Cyclic Groups, Frequency Alignment, Number Theory, Signal Processing, Periodic Systems
+### Example A: `N=12`, frequencies `{3,4,6}`
+
+Pairwise alignment costs are:
+
+\[
+A_{3,4}=12,
+\quad
+A_{3,6}=4,
+\quad
+A_{4,6}=6.
+\]
+
+Thus
+
+\[
+\overline A=\frac{12+4+6}{3}=\frac{22}{3}.
+\]
+
+### Example B: `N=10`, frequencies `{3,4}`
+
+\[
+A_{3,4}=\frac{10}{\gcd(10,1)}=10.
+\]
+
+These examples do not by themselves establish that `N=12` is globally more coherent than `N=10`; frequency-set size and composition must be controlled.
 
 ---
 
-Authorship Note
+## 7. Geometric interpretation
 
-This document establishes initial formalization and conceptual priority for the framework of Discrete Harmonic Alignment (DHA), including its definitions, metrics, and structural hypotheses.
+The map
+
+\[
+k\mapsto e^{2\pi i k/N}
+\]
+
+embeds `Z_N` on the unit circle. Under this embedding, frequency orbits become finite cyclic point sets.
+
+Calling `f=3` a triangle, `f=4` a square or `f=6` a hexagon is only exact when the generated orbit has the corresponding cardinality and the embedding is interpreted accordingly. The invariant quantity is the orbit structure determined by `N/gcd(N,f)`.
 
 ---
+
+## 8. Relation to signal processing and electrical systems
+
+DHA uses mathematical ingredients familiar from periodic systems, modular arithmetic and Fourier analysis. Resemblance to three-phase engineering or DFT structure is contextual; no engineering efficiency or physical resonance claim is authorized without a system-specific model and measurement.
+
+---
+
+## 9. Open problems
+
+1. Optimal `N` for a declared distribution of frequency sets.
+2. Weighted and probabilistic frequency ensembles.
+3. Normalized cross-`k` coherence metrics.
+4. Continuous-limit constructions with a specified topology/measure.
+5. Comparison with standard synchronization and circular-statistics metrics.
+6. Empirical usefulness in signal processing after baseline comparison.
+
+---
+
+## 10. Status
+
+```text
+finite_cyclic_domain = KNOWN_MATH
+individual_period = KNOWN_MATH
+pairwise_first_alignment = CORRECTED_MATH_PASS
+joint_phase_zero_return = MATH_PASS
+DHA_metric = AUTHOR_DEFINITION
+factorability_optimality = HYPOTHESIS
+physical_efficiency_claim = TOKEN_VAZIO
+claim_allowed = false
+```
+
+The contribution is therefore a defined research metric and problem family, not a proof of a new universal harmonic law.
